@@ -2,10 +2,13 @@ import React from "react";
 
 type InputProps = {
   label: string;
+  name: string;
   type: string;
+  value: string;
+  onChange: (e: React.ChangeEvent<HTMLInputElement | HTMLSelectElement>) => void;
 };
 
-const Input: React.FC<InputProps> = ({ label, type = 'text' }) => {
+const Input: React.FC<InputProps> = ({ label, name, type = 'text', value, onChange }) => {
   return (
     <div className="input">
       <div className="input__container">
@@ -16,12 +19,19 @@ const Input: React.FC<InputProps> = ({ label, type = 'text' }) => {
         {type !== 'select' && (
           <input
             type={type}
+            name={name}
             className="input__value"
+            value={value}
+            onChange={onChange}
           />
         )}
 
         {type === 'select' && (
-          <select className="input__select">
+          <select
+            className="input__select"
+            name={name}
+            value={value}
+          >
             <option value="">Select an option</option>
           </select>
         )}

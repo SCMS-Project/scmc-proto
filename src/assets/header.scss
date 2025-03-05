@@ -17,32 +17,19 @@
     width: 1500px;
   }
 
-  &__logo {
-    display: flex;
-    justify-content: center;
-    padding: 0 15px 0 15px;
-    width: 15%;
-    cursor: pointer;
-
-    img {
-      height: 50px;
-      width: 50px;
-    }
-  }
-
   &__main-container {
     display: flex;
-    width: 85%;
+    width: 100%;
     justify-content: space-between;
     background-color: $header-bg;
 
     &__navigation-menu {
       display: flex;
-      width: 85%;
-      justify-content: space-around;
-      padding-left: 20px;
+      width: 15%;
+      // justify-content: space-around;
+      // padding-left: 20px;
 
-      &__menu-button {
+      &__button {
         color: $nav-button;
         background-color: transparent;
         outline: none;
@@ -50,6 +37,19 @@
         padding: 10px 10px;
         cursor: pointer;
         font-size: 20px;
+      }
+    }
+
+    &__logo {
+      display: flex;
+      justify-content: center;
+      padding: 0 15px 0 15px;
+      // width: 15%;
+      cursor: pointer;
+  
+      img {
+        height: 50px !important;
+        width: 50px !important;
       }
     }
 
