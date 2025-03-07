@@ -5,8 +5,7 @@ type InputProps = {
   name: string;
   type: string;
   value: string;
-  options?: string[];
-
+  options?: { id: number; label: string }[];
   onChange: (e: React.ChangeEvent<HTMLInputElement | HTMLSelectElement>) => void;
 };
 
@@ -17,10 +16,11 @@ const Input: React.FC<InputProps> = ({
   return (
     <div className="input">
       <div className="input__container">
-        <label className="input__label">
-          {label}
-        </label>
-
+        {label !== "" && (
+          <label className="input__label">
+            {label}
+          </label>
+        )}
         {type !== 'select' && (
           <input
             type={type}
@@ -38,12 +38,12 @@ const Input: React.FC<InputProps> = ({
             value={value}
             onChange={onChange}
           >
-            {options?.map((item, index) => (
+            {options?.map((item) => (
               <option
-                key={index}
-                value={item}
+                key={item.id}
+                value={item.label}
               >
-                {item}
+                {item.label}
               </option>
             ))}
           </select>

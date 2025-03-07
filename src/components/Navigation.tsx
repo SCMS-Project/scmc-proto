@@ -8,15 +8,18 @@ import { menuItems } from "../constants";
 type NavMenuProps = {
   isNavMenuOpen: boolean;
   onCloseNavigationMenu: () => void;
+  navigate: (path: string) => void;
 };
 
-const NavigationPane: React.FC<NavMenuProps> = ({ isNavMenuOpen, onCloseNavigationMenu }) => {
+const NavigationPane: React.FC<NavMenuProps> = ({
+  isNavMenuOpen, onCloseNavigationMenu, navigate,
+}) => {
   return (
     <SwipeableDrawer
       anchor="left"
       open={isNavMenuOpen}
       onClose={onCloseNavigationMenu}
-      onOpen={() => {}}
+      onOpen={() => { }}
       className="navigation-pane"
       sx={{
         width: '20%',
@@ -26,15 +29,15 @@ const NavigationPane: React.FC<NavMenuProps> = ({ isNavMenuOpen, onCloseNavigati
       }}
     >
       <List className="navigation-pane__list">
-        {menuItems.map((text) => (
+        {menuItems.map((item) => (
           <ListItem
             button
-            key={text}
-            onClick={onCloseNavigationMenu}
+            key={item.path}
+            onClick={() => navigate(item.path)}
             className="navigation-pane__list-item navigation-pane__list-item--hover"
           >
             <ListItemText
-              primary={text}
+              primary={item.label}
               className="navigation-pane__list-item-text navigation-pane__list-item-text--hover"
             />
           </ListItem>

@@ -1,4 +1,6 @@
+import Input from "../components/Input";
 import React, { useState } from "react";
+import { userRoles } from "../constants";
 
 type User = {
   id: number;
@@ -16,25 +18,30 @@ const dummyUsers: User[] = [
 
 const UserManagement: React.FC = () => {
   const [searchTerm, setSearchTerm] = useState("");
+  const [selectedRole, setSelectedRole] = useState({});
 
   const filteredUsers = dummyUsers.filter((user) =>
     user.name.toLowerCase().includes(searchTerm.toLowerCase())
   );
 
+
+  const handleRoleChange = () => {
+
+  };
+
   return (
     <div className="user-management">
       <h2 className="user-management__title">User Management</h2>
 
-      {/* Search Bar */}
-      <input
-        type="text"
-        placeholder="Search users..."
-        className="user-management__search"
-        value={searchTerm}
-        onChange={(e) => setSearchTerm(e.target.value)}
-      />
-
-      {/* User Table */}
+      <div className="user-management__search-container">
+        <input
+          type="text"
+          placeholder="Search users..."
+          className="user-management__search-container__search"
+          value={searchTerm}
+          onChange={(e) => setSearchTerm(e.target.value)}
+        />
+      </div>
       <div className="user-management__table-wrapper">
         <table className="user-management__table">
           <thead>
@@ -48,7 +55,16 @@ const UserManagement: React.FC = () => {
             {filteredUsers.map((user) => (
               <tr key={user.id} className="user-management__table-row">
                 <td className="user-management__table-td">{user.name}</td>
-                <td className="user-management__table-td">{user.role}</td>
+                <td className="user-management__table-td">
+                  <Input
+                    label=""
+                    name="role"
+                    type="select"
+                    value={selectedRole.label}
+                    onChange={handleRoleChange}
+                    options={userRoles}
+                  />
+                </td>
                 <td className="user-management__table-td">
                   {user.role === "student"
                     ? user.courses?.join(", ") || "No courses assigned"

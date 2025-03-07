@@ -1,5 +1,5 @@
 import React, { useState } from "react";
-import Input from "../components/input";
+import Input from "../components/Input";
 import axiosInstance from "../api/axiosInstance";
 import { AUTH_LOG_OUT, AUTH_SING_UP } from "../api/APIUrls";
 import { courses, titles } from "../constants";
@@ -31,10 +31,14 @@ const Registration: React.FC = () => {
 
   const handleSubmit = async (e: React.FormEvent) => {
     e.preventDefault();
+    const { password1, password2, ...otherFormData } = formData;
 
     try {
       const response = await axiosInstance.post(AUTH_SING_UP, {
-        user: formData,
+        user: {
+          ...otherFormData,
+          password: password1,
+        },
       })
       console.log(33, response);
     } catch (error) {

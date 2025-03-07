@@ -6,6 +6,8 @@ import LoginModal from "../components/LoginModal";
 import { useAppContext } from "../context/AppContext";
 import { useNavigate } from "react-router-dom";
 import Navigation from "./Navigation";
+import axiosInstance from "../api/axiosInstance";
+import { AUTH_LOG_IN } from "../api/APIUrls";
 
 const Header: React.FC = () => {
   const [isLoggedIn, setIsLoggedIn] = useState<boolean>(false);
@@ -18,15 +20,18 @@ const Header: React.FC = () => {
   const navigate = useNavigate();
 
   const { state, dispatch } = useAppContext();
-  // console.log(12, { email, password });
+  console.log(12, state);
 
+  const handleUserIconClick = () => {
+    if (state.user) {
+      navigate('/profile');
+    } else {
+      setIsLoginModalOpen(true);
+    }
+  }
 
   const handleLoginModalClose = () => {
     setIsLoginModalOpen((prevState) => !prevState);
-  }
-
-  const handleSignInClick = () => {
-    setIsLoginModalOpen(true);
   }
 
   const handleGoToHomePage = () => {
@@ -38,8 +43,30 @@ const Header: React.FC = () => {
   }
 
   const handleCloseNavigationMenu = () => {
-    setIsNavMenuOpen(false); 
+    setIsNavMenuOpen(false);
   };
+
+  const handleSignInClick = async () => {
+    try {
+      const response = await axiosInstance.post(AUTH_LOG_IN, {
+        email,
+        password,
+      })
+      setIsLoginModalOpen(false);
+
+      const userData = response.data.data.user;
+      const token = response.data.data.accessToken;
+
+      localStorage.setItem("authToken", token);
+      localStorage.setItem("user", JSON.stringify(userData));
+      dispatch({ type: 'SET_USER', payload: userData })
+      setIsLoggedIn(true);
+
+    } catch (error) {
+      console.error(error);
+    }
+  };
+
 
   return (
     <div className="header">
@@ -60,7 +87,7 @@ const Header: React.FC = () => {
         <div className="header__main-container__button-container">
           <button
             className="header__main-container__button-container__user-button"
-            onClick={handleSignInClick}
+            onClick={handleUserIconClick}
           >
             <UserIcon color={isLoggedIn ? 'Green' : 'Yellow'} />
           </button>
@@ -80,6 +107,7 @@ const Header: React.FC = () => {
         <Navigation
           isNavMenuOpen={isNavMenuOpen}
           onCloseNavigationMenu={handleCloseNavigationMenu}
+          navigate={navigate}
         />
       )}
     </div>

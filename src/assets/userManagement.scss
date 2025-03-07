@@ -18,21 +18,29 @@
     margin: 16px 0 16px 0;
   }
 
-  &__search {
-    width: 90%;
-    padding: 8px 12px;
-    border: 1px solid #ccc;
-    border-radius: 6px;
-    margin-bottom: 16px;
-    font-size: 14px;
+  &__search-container {
+    display: flex;
+    justify-content: center;
+
+    &__search {
+      width: 90%;
+      padding: 8px 12px;
+      border: 1px solid #ccc;
+      border-radius: 6px;
+      margin-bottom: 16px;
+      font-size: 14px;
+    }
   }
 
+
   &__table-wrapper {
+    display: flex;
+    justify-content: center;
     overflow-x: auto;
   }
 
   &__table {
-    width: 95%;
+    width: 90%;
     border-collapse: collapse;
     border: 1px solid #8f8d8d;
   }
@@ -43,6 +51,7 @@
 
   &__table-th {
     text-align: center;
+    justify-content: center;
     padding: 12px;
     border: 1px solid #8f8d8d;
   }
