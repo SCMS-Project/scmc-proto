@@ -5,10 +5,15 @@ type InputProps = {
   name: string;
   type: string;
   value: string;
+  options?: string[];
+
   onChange: (e: React.ChangeEvent<HTMLInputElement | HTMLSelectElement>) => void;
 };
 
-const Input: React.FC<InputProps> = ({ label, name, type = 'text', value, onChange }) => {
+const Input: React.FC<InputProps> = ({
+  label, name, type = 'text', value, onChange, options,
+}) => {
+
   return (
     <div className="input">
       <div className="input__container">
@@ -31,8 +36,16 @@ const Input: React.FC<InputProps> = ({ label, name, type = 'text', value, onChan
             className="input__select"
             name={name}
             value={value}
+            onChange={onChange}
           >
-            <option value="">Select an option</option>
+            {options?.map((item, index) => (
+              <option
+                key={index}
+                value={item}
+              >
+                {item}
+              </option>
+            ))}
           </select>
         )}
       </div>

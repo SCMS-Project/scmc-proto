@@ -2,21 +2,27 @@ import React, { useState } from "react";
 import Input from "../components/input";
 import axiosInstance from "../api/axiosInstance";
 import { AUTH_LOG_OUT, AUTH_SING_UP } from "../api/APIUrls";
+import { courses, titles } from "../constants";
 
 const Registration: React.FC = () => {
   const [formData, setFormData] = useState({
     courseProgramme: "",
     title: "",
-    fullName: "",
+    firstName: "",
+    lastName: "",
     dateOfBirth: "",
     email: "",
     phoneNumber: "",
     nicNumber: "",
     address: "",
+    password1: "",
+    password2: "",
   });
 
   const handleChange = (e: React.ChangeEvent<HTMLInputElement | HTMLSelectElement>) => {
     const { name, value } = e.target;
+    console.log(22, { name, value });
+
     setFormData({
       ...formData,
       [name]: value,
@@ -52,6 +58,7 @@ const Registration: React.FC = () => {
               type="select"
               name="courseProgramme"
               value={formData.courseProgramme}
+              options={courses}
               onChange={handleChange}
             />
             <Input
@@ -59,13 +66,21 @@ const Registration: React.FC = () => {
               type="select"
               name="title"
               value={formData.title}
+              options={titles}
               onChange={handleChange}
             />
             <Input
-              label="Full Name"
+              label="First Name"
               type="text"
-              name="fullName"
-              value={formData.fullName}
+              name="firstName"
+              value={formData.firstName}
+              onChange={handleChange}
+            />
+            <Input
+              label="Last Name"
+              type="text"
+              name="lastName"
+              value={formData.lastName}
               onChange={handleChange}
             />
             <Input
@@ -101,6 +116,20 @@ const Registration: React.FC = () => {
               type="text"
               name="address"
               value={formData.address}
+              onChange={handleChange}
+            />
+            <Input
+              label="Password"
+              type="text"
+              name="password1"
+              value={formData.password1}
+              onChange={handleChange}
+            />
+            <Input
+              label="Confirm Password"
+              type="text"
+              name="password2"
+              value={formData.password2}
               onChange={handleChange}
             />
           </div>
