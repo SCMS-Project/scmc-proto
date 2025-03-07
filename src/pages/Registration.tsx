@@ -34,7 +34,7 @@ const Registration: React.FC = () => {
 
     try {
       const response = await axiosInstance.post(AUTH_SING_UP, {
-        formData,
+        user: formData,
       })
       console.log(33, response);
     } catch (error) {
