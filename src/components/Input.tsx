@@ -1,4 +1,5 @@
 import React from "react";
+import { capitalizeFirstLetter } from "./util";
 
 type InputProps = {
   label: string;
@@ -43,7 +44,7 @@ const Input: React.FC<InputProps> = ({
                 key={item.id}
                 value={item.label}
               >
-                {item.label}
+                {capitalizeFirstLetter(item.label)}
               </option>
             ))}
           </select>

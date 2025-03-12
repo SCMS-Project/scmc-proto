@@ -15,7 +15,7 @@
   &__title {
     font-size: 30px;
     font-weight: 600;
-    margin: 16px 0 16px 0;
+    margin: 16px 0;
   }
 
   &__search-container {
@@ -32,38 +32,63 @@
     }
   }
 
-
   &__table-wrapper {
-    display: flex;
-    justify-content: center;
-    overflow-x: auto;
+    width: 90%;
+    max-height: 500px; // Sets a max height for the table body to enable scrolling
+    overflow-y: auto;
+    margin: 0 auto;
   }
 
   &__table {
-    width: 90%;
+    width: 100%;
     border-collapse: collapse;
     border: 1px solid #8f8d8d;
+    table-layout: fixed; // Ensures columns maintain width
   }
 
-  &__table-header {
+  &__table thead {
+    top: 0;
     background-color: #f3f3f3;
+    z-index: 2;
   }
 
-  &__table-th {
-    text-align: center;
-    justify-content: center;
-    padding: 12px;
-    border: 1px solid #8f8d8d;
+  &__table tbody {
+    display: block;
+    overflow-y: auto;
+    scrollbar-width: none;
+    max-height: 400px; // Controls the scrolling height for tbody
+    width: 100%;
   }
 
-  &__table-row {
-    &:hover {
-      background-color: #f9f9f9;
-    }
+  &__table tr {
+    display: table;
+    width: 100%;
+    table-layout: fixed;
   }
 
+  &__table-th,
   &__table-td {
+    text-align: center;
     padding: 12px;
     border: 1px solid #8f8d8d;
+  }
+
+  &__table-th-fixed,
+  &__table-td-fixed {
+    text-align: center;
+    width: 50px; /* Fixed width for delete button */
+    max-width: 50px; /* Ensure it doesn't exceed this width */
+    padding: 12px;
+    border: 1px solid #8f8d8d;
+  }
+
+  &__table-row:hover {
+    background-color: #f9f9f9;
+  }
+
+  &__delete-icon {
+    width: 25px;
+    height: 25px;
+    cursor: pointer;
   }
 }

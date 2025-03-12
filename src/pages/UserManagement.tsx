@@ -1,33 +1,112 @@
 import Input from "../components/Input";
-import React, { useState } from "react";
+import React, { useEffect, useState } from "react";
 import { userRoles } from "../constants";
+import { LECTURER_CREATE, STUDENT_CREATE, USER_MGT_DELETE, USER_MGT_GET_ALL } from "../api/APIUrls";
+import axiosInstance from "../api/axiosInstance";
+import DeleteIcon from "../assets/images/delete-icon.png";
 
-type User = {
-  id: number;
-  name: string;
-  role: "admin" | "student" | "teacher";
-  courses?: string[];
+type UserData = {
+  id: string;
+  fullName: string;
+  nic: string;
+  phoneNumber: string;
+  role: string;
+  email: string;
+  dateOfBirth: string;
+  address: string;
+  lecturerId: string;
+  studentId: string;
 };
 
-const dummyUsers: User[] = [
-  { id: 1, name: "Alice Johnson", role: "admin" },
-  { id: 2, name: "Bob Smith", role: "student", courses: ["Math", "Physics"] },
-  { id: 3, name: "Charlie Brown", role: "teacher" },
-  { id: 4, name: "Diana White", role: "student", courses: ["Biology"] },
-];
-
 const UserManagement: React.FC = () => {
-  const [searchTerm, setSearchTerm] = useState("");
-  const [selectedRole, setSelectedRole] = useState({});
+  const [searchTerm, setSearchTerm] = useState<string>("");
+  const [fetchData, setFetchData] = useState<boolean>(false);
+  const [users, setUsers] = useState<UserData[]>([]);
+  console.log(25, users);
+  console.log(26, fetchData);
+  
 
-  const filteredUsers = dummyUsers.filter((user) =>
-    user.name.toLowerCase().includes(searchTerm.toLowerCase())
+
+  const getAllUsers = async () => {
+    try {
+      const response = await axiosInstance.get(USER_MGT_GET_ALL);
+      const modifiedUsers = response.data.map((user: any) => ({
+        id: user._id,
+        fullName: `${user.firstName} ${user.lastName}`,
+        nic: user.nicNumber,
+        phoneNumber: user.phoneNumber,
+        role: user.role,
+        email: user.email,
+        dateOfBirth: user.dateOfBirth,
+        address: user.address,
+        lecturerId: user.lecturer,
+        studentId: user.student,
+      }))
+      setUsers(modifiedUsers)
+
+    } catch (error) {
+      console.error(error)
+    }
+  }
+
+  useEffect(() => {
+    getAllUsers();
+  }, [fetchData])
+
+  const filteredUsers = users.filter((user) =>
+    user.fullName.toLowerCase().includes(searchTerm.toLowerCase())
   );
 
 
-  const handleRoleChange = () => {
+  const handleRoleChange = async (e: React.ChangeEvent<HTMLSelectElement>, user: UserData) => {
+    const newRole = e.target.value;
 
+    console.log(59, { newRole, user });
+
+    setUsers((prevUsers) =>
+      prevUsers.map((u) =>
+        u.id === user.id ? { ...u, role: newRole } : u
+      )
+    );
+
+    try {
+      if (newRole === 'lecturer') {
+        const url = LECTURER_CREATE.replace(":id", user.lecturerId);
+
+        const response = await axiosInstance.post(url, {
+          lecturer: {
+            lecturerId: user.lecturerId,
+            designation: "Senior Lecturera",
+            hireDate: "2021-09-15",
+            qualifications: ["MSc in Computer Science", "PhD in Artificial Intelligence"],
+            subjectsTaught: ["Machine Learning", "Data Structures and Algorithms"]
+          }
+        });
+      } else if (newRole === 'student') {
+        const url = STUDENT_CREATE.replace(":id", user.studentId);
+
+        const response = await axiosInstance.post(url, {
+          student: {
+            studentId: user.studentId,
+            enrollmentDate: "2/05/2025"
+          }
+        })
+      }
+    } catch (error) {
+      console.error(error);
+    }
   };
+
+  const handleDeleteUser = async (id) => {
+    try {
+      const url = USER_MGT_DELETE.replace(":id", id);
+      const response = await axiosInstance.delete(url)
+      setFetchData((prevState) => !prevState);
+    } catch (error) {
+      console.error(error)
+    }
+  };
+
 
   return (
     <div className="user-management">
@@ -48,27 +127,32 @@ const UserManagement: React.FC = () => {
             <tr className="user-management__table-header">
               <th className="user-management__table-th">Name</th>
               <th className="user-management__table-th">Role</th>
-              <th className="user-management__table-th">Assigned Courses</th>
+              <th className="user-management__table-th">NIC</th>
+              <th className="user-management__table-th-fixed" />
             </tr>
           </thead>
           <tbody>
             {filteredUsers.map((user) => (
               <tr key={user.id} className="user-management__table-row">
-                <td className="user-management__table-td">{user.name}</td>
+                <td className="user-management__table-td">{user.fullName}</td>
                 <td className="user-management__table-td">
                   <Input
                     label=""
                     name="role"
                     type="select"
-                    value={selectedRole.label}
-                    onChange={handleRoleChange}
+                    value={user.role}
+                    onChange={(e) => handleRoleChange(e, user)}
                     options={userRoles}
                   />
                 </td>
-                <td className="user-management__table-td">
-                  {user.role === "student"
-                    ? user.courses?.join(", ") || "No courses assigned"
-                    : "N/A"}
+                <td className="user-management__table-td">{user.nic}</td>
+                <td className="user-management__table-td-fixed">
+                  <button style={{ border: "none" }} onClick={() => handleDeleteUser(user.id)}>
+                    <img
+                      className="user-management__delete-icon"
+                      src={DeleteIcon}
+                    />
+                  </button>
                 </td>
               </tr>
             ))}

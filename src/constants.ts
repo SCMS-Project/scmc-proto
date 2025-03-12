@@ -20,8 +20,8 @@ export const titles = [
 ];
 
 export const userRoles = [
-  { id: 1, label: "User" },
-  { id: 2, label: "Admin" },
-  { id: 3, label: "Lecturer" },
-  { id: 4, label: "Student" },
+  // { id: 1, label: "user" },
+  { id: 2, label: "admin" },
+  { id: 3, label: "lecturer" },
+  { id: 4, label: "student" },
 ]
