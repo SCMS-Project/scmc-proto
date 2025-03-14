@@ -14,6 +14,11 @@ type NavMenuProps = {
 const NavigationPane: React.FC<NavMenuProps> = ({
   isNavMenuOpen, onCloseNavigationMenu, navigate,
 }) => {
+  const handleNavigation = (path: string) => {
+    navigate(path);
+    onCloseNavigationMenu();
+  }
+
   return (
     <SwipeableDrawer
       anchor="left"
@@ -37,7 +42,7 @@ const NavigationPane: React.FC<NavMenuProps> = ({
           <ListItem
             button
             key={item.path}
-            onClick={() => navigate(item.path)}
+            onClick={() => handleNavigation(item.path)}
             className="navigation-pane__list-item"
           >
             <ListItemText
