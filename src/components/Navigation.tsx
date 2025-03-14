@@ -22,23 +22,27 @@ const NavigationPane: React.FC<NavMenuProps> = ({
       onOpen={() => { }}
       className="navigation-pane"
       sx={{
-        width: '20%',
+        width: 300,
         '& .MuiDrawer-paper': {
-          width: '20%',
+          width: 300,
         }
       }}
     >
+      <div className="navigation-pane__header">
+        <h2 className="navigation-pane__title">Smart Campus Management System</h2>
+      </div>
+
       <List className="navigation-pane__list">
         {menuItems.map((item) => (
           <ListItem
             button
             key={item.path}
             onClick={() => navigate(item.path)}
-            className="navigation-pane__list-item navigation-pane__list-item--hover"
+            className="navigation-pane__list-item"
           >
             <ListItemText
               primary={item.label}
-              className="navigation-pane__list-item-text navigation-pane__list-item-text--hover"
+              className="navigation-pane__list-item-text"
             />
           </ListItem>
         ))}
