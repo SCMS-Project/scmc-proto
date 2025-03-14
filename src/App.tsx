@@ -7,6 +7,8 @@ import Registration from './pages/Registration';
 import { BrowserRouter as Router, Route, Routes } from 'react-router-dom';
 import UserManagement from './pages/UserManagement';
 import Profile from './pages/Profile';
+import CourseManagement from './pages/CourseManagement';
+import SubjectManagement from './pages/SubjectManagement';
 
 function App() {
   return (
@@ -18,6 +20,8 @@ function App() {
               <Route path="/" element={<Home />} />
               <Route path="/registration" element={<Registration />} />
               <Route path="/user-management" element={<UserManagement />} />
+              <Route path="/course-management" element={<CourseManagement />} />
+              <Route path="/subject-management" element={<SubjectManagement />} />
               <Route path="/profile" element={<Profile />} />
             </Routes>
           </Layout>

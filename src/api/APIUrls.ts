@@ -13,3 +13,13 @@ export const STUDENT_GET_ALL = "students"
 
 export const LECTURER_CREATE = "lecturers/:id";
 export const LECTURER_GET_ALL = "lecturers";
+
+export const COURSE_CREATE = "courses";
+export const COURSE_GET_ALL = "courses";
+export const COURSE_UPDATE = "courses/:id";
+export const COURSE_DELETE = "courses/:id";
+
+export const SUBJECT_CREATE = "subjects";
+export const SUBJECT_GET_ALL = "subjects";
+export const SUBJECT_UPDATE = "subjects/:id";
+export const SUBJECT_DELETE = "subjects/:id";

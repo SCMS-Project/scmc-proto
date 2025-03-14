@@ -2,6 +2,8 @@ export const menuItems = [
   { label: "Home", path: "/", },
   { label: "About", path: "/about", },
   { label: "User Management", path: "/user-management", },
+  { label: "Course Management", path: "/course-management", },
+  { label: "Subject Management", path: "/Subject-management"},
   { label: "Help", path: '/help' }
 ];
 

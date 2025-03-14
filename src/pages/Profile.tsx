@@ -33,11 +33,14 @@ const Profile: React.FC = () => {
     return <div>Loading...</div>;
   }
 
+  console.log(36, state);
+  
+
   return (
     <div className="profile">
       <h1>User Profile</h1>
       <div className="profile__main-container">
-        <p><strong>Username:</strong>{`${user?.firstName} ${user?.lastName}`}</p>
+        <p><strong>Username:</strong>{` ${user?.firstName} ${user?.lastName}`}</p>
         <p><strong>Email:</strong> {user?.email}</p>
         {/* <p><strong>DOB:</strong> January 1, 2023</p> */}
       </div>

@@ -4,7 +4,7 @@ import '../assets/styles.scss';
 const Home: React.FC = () => {
   return (
     <div className="home">
-      Here
+      Home Page
     </div>
   );
 };
