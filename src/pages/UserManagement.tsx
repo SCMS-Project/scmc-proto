@@ -22,10 +22,6 @@ const UserManagement: React.FC = () => {
   const [searchTerm, setSearchTerm] = useState<string>("");
   const [fetchData, setFetchData] = useState<boolean>(false);
   const [users, setUsers] = useState<UserData[]>([]);
-  console.log(25, users);
-  console.log(26, fetchData);
-  
-
 
   const getAllUsers = async () => {
     try {

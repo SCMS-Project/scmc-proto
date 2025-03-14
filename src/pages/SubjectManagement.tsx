@@ -3,7 +3,6 @@ import axiosInstance from "../api/axiosInstance";
 import { SUBJECT_CREATE, SUBJECT_GET_ALL, SUBJECT_UPDATE, SUBJECT_DELETE, COURSE_GET_ALL } from "../api/APIUrls";
 import DeleteIcon from "../assets/images/delete-icon.png";
 import AcademicModal from "../components/AcademicModal";
-// import "../styles/SubjectManagement.scss";
 
 type SubjectData = {
   id: string;

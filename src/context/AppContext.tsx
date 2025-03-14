@@ -1,6 +1,16 @@
 import { createContext, useContext, useReducer, ReactNode, useEffect } from "react";
 
-type State = { user: { firstName: string; lastName: string; email: string } | null };
+type State = {
+  user: {
+    firstName: string;
+    lastName: string;
+    email: string,
+    dateOfBirth: string;
+    phoneNumber: string,
+    nicNumber: string;
+    address: string
+  } | null
+};
 type Action = { type: "SET_USER"; payload: any } | { type: "LOGOUT" };
 
 const AppContext = createContext<{ state: State; dispatch: React.Dispatch<Action> } | undefined>(undefined);
@@ -19,7 +29,7 @@ export const AppProvider = ({ children }: { children: ReactNode }) => {
     const storedUser = localStorage.getItem("user")
 
     if (storedToken && storedUser) {
-      dispatch({ type: "SET_USER", payload: storedUser });
+      dispatch({ type: "SET_USER", payload: JSON.parse(storedUser) });
     }
   }, []);
 

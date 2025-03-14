@@ -22,8 +22,8 @@ const Profile: React.FC = () => {
     try {
       localStorage.removeItem("authToken");
       localStorage.removeItem("user");
-      dispatch({ type: "LOGOUT" })
-      navigate('/')
+      dispatch({ type: "LOGOUT" });
+      navigate("/");
     } catch (error) {
       console.error(error);
     }
@@ -33,18 +33,41 @@ const Profile: React.FC = () => {
     return <div>Loading...</div>;
   }
 
-  console.log(36, state);
-  
-
   return (
     <div className="profile">
-      <h1>User Profile</h1>
-      <div className="profile__main-container">
-        <p><strong>Username:</strong>{` ${user?.firstName} ${user?.lastName}`}</p>
-        <p><strong>Email:</strong> {user?.email}</p>
-        {/* <p><strong>DOB:</strong> January 1, 2023</p> */}
+      <div className="profile__header">
+        <h1 className="profile__title">User Profile</h1>
+        <p className="profile__description">
+          Welcome to your profile page. Here you can view your details.
+        </p>
       </div>
-      <button onClick={handleSignOut}>Sign Out</button>
+      
+      <div className="profile__main-container">
+        <div className="profile__info">
+          <div className="profile__info-item">
+            <strong className="profile__info-item-label">Username:</strong> {`${user?.firstName} ${user?.lastName}`}
+          </div>
+          <div className="profile__info-item">
+            <strong className="profile__info-item-label">Email:</strong> {user?.email}
+          </div>
+          <div className="profile__info-item">
+            <strong className="profile__info-item-label">Date of Birth:</strong> {user?.dateOfBirth}
+          </div>
+          <div className="profile__info-item">
+            <strong className="profile__info-item-label">Address:</strong> {user?.address}
+          </div>
+          <div className="profile__info-item">
+            <strong className="profile__info-item-label">NIC:</strong> {user?.nicNumber}
+          </div>
+          <div className="profile__info-item">
+            <strong className="profile__info-item-label">Phone Number:</strong> {user?.phoneNumber}
+          </div>
+        </div>
+
+        <button className="profile__signout-button" onClick={handleSignOut}>
+          Sign Out
+        </button>
+      </div>
     </div>
   );
 };

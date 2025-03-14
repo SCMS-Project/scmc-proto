@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React, { useEffect, useState } from "react";
 import educationIcon from "../assets/images/education-icon.svg";
 import { NavIcon } from "../components/svgs/NavIcon"
 import { UserIcon } from "../components/svgs/UserIcon";
@@ -20,8 +20,8 @@ const Header: React.FC = () => {
   const navigate = useNavigate();
 
   const { state, dispatch } = useAppContext();
-  console.log(12, state);
-
+  const {user} = state;
+  
   const handleUserIconClick = () => {
     if (state.user) {
       navigate('/profile');
@@ -66,6 +66,12 @@ const Header: React.FC = () => {
       console.error(error);
     }
   };
+
+  useEffect(() => {
+    if (state.user) {
+      setIsLoggedIn(true);
+    }
+  }, [user]);
 
 
   return (
