@@ -9,6 +9,7 @@ import UserManagement from './pages/UserManagement';
 import Profile from './pages/Profile';
 import CourseManagement from './pages/CourseManagement';
 import SubjectManagement from './pages/SubjectManagement';
+import About from './pages/About';
 
 function App() {
   return (
@@ -18,6 +19,7 @@ function App() {
           <Layout>
             <Routes>
               <Route path="/" element={<Home />} />
+              <Route path="/about" element={<About />} />
               <Route path="/registration" element={<Registration />} />
               <Route path="/user-management" element={<UserManagement />} />
               <Route path="/course-management" element={<CourseManagement />} />
