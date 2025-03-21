@@ -15,10 +15,7 @@ const AcademicModal: React.FC<CommonModalProps> = ({ onClose, onCreate, courses,
   const [description, setDescription] = useState("Dummy Description");
   const [name, setName] = useState("");
   const [courseId, setCourseId] = useState("");
-  const [subjectId, setSubjectId] = useState("");
-
-  console.log(17, editingData);
-
+  const [subjectId, setSubjectId] = useState("");``
 
   useEffect(() => {
     if (editingData) {
@@ -43,9 +40,6 @@ const AcademicModal: React.FC<CommonModalProps> = ({ onClose, onCreate, courses,
     }
     onClose();
   };
-
-  console.log(40, { title, description });
-
 
   return (
     <div className="academic-modal">

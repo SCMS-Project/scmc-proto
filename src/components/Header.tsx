@@ -1,5 +1,5 @@
 import React, { useEffect, useState } from "react";
-import educationIcon from "../assets/images/education-icon.svg";
+import educationIcon from "../assets/images/uni-logo.png";
 import { NavIcon } from "../components/svgs/NavIcon"
 import { UserIcon } from "../components/svgs/UserIcon";
 import LoginModal from "../components/LoginModal";
@@ -88,7 +88,7 @@ const Header: React.FC = () => {
           className="header__main-container__logo"
           role="button"
           onClick={handleGoToHomePage}>
-          <img src={educationIcon} alt="education-icon" />
+          <img src={educationIcon} alt="education-icon" style={{marginTop: '4px', opacity: '0.8'}} />
         </div>
         <div className="header__main-container__button-container">
           <button
